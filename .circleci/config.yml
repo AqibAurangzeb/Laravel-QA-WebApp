@@ -1,10 +1,9 @@
 version: 2
 jobs:
   deploy:
+    working_directory: ~/Laravel-QA-Application
     docker:
       - image: circleci/php:7.1-jessie-node-browsers
-
-    working_directory: ~/Laravel-QA-Application
 
     steps:
       - checkout
@@ -41,7 +40,7 @@ jobs:
       # Install software required to run EB deployer
       - run:
           name: Installing deployment dependencies
-          working_directory: ~/repo
+          working_directory: ~/Laravel-QA-Application
           command: |
             sudo apt-get -y -qq update
             sudo apt-get install python-pip python-dev build-essential
@@ -49,7 +48,7 @@ jobs:
       # Build css and js (prod script builds these. you should make your own)
       - run:
           name: Install Node modules
-          working_directory: ~/repo
+          working_directory: ~/Laravel-QA-Application
           command: npm run prod
 
       # Add everything (except vendors that will be installed automatically and node_modules that are not needed because we already built js and css) to a ZIP
