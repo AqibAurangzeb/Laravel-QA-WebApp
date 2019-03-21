@@ -54,7 +54,7 @@ jobs:
           command: zip Laravel-QA-Application.zip -r * .[^.]* --exclude=vendor/* --exclude=node_modules/* --exclude=.circleci/* --exclude=.elasticbeanstalk/*
           
       - store_artifacts:
-          path: /app/Laravel-QA-Application.zip
+          path: /app
 
       # Run EB deploy
       - run:
