@@ -1,85 +1,74 @@
-
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
 version: 2
 jobs:
-  build:
+  deploy:
     docker:
-      # Specify the version you desire here
       - image: circleci/php:7.1-jessie-node-browsers
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      # 
-      # - image: redis:2.8.19
+    working_directory: ~/repo
 
     steps:
       - checkout
 
-      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
-
       # Download and cache dependencies
-
-      # composer cache
       - restore_cache:
           keys:
-          # "composer.lock" can be used if it is committed to the repo
           - v1-dependencies-{{ checksum "composer.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      # Install PHP vendors
       - run: composer install -n --prefer-dist
 
+      # Save vendors
       - save_cache:
-          key: composer-v1-{{ checksum "composer.lock" }}
           paths:
-            - vendor
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
 
-      # node cache
+      # Install NPM packages for frontend things
+      - run: npm install
 
-      - restore_cache:
-          keys:
-            - node-v3-{{ checksum "package.json" }}
-            - node-v3-
-      - run: yarn install
+      # Save packages
       - save_cache:
           key: node-v3-{{ checksum "package.json" }}
           paths:
             - node_modules
             - ~/.yarn
 
-      # prepare the database
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      # run tests!
+      # - run: phpunit
 
-      # run tests with phpunit or codecept
-      
-            # Install software required to run EB deployer
+      # Install software required to run EB deployer
       - run:
           name: Installing deployment dependencies
-          working_directory: /
+          working_directory: ~/repo
           command: |
             sudo apt-get -y -qq update
             sudo apt-get install python-pip python-dev build-essential
-            sudo pip install --upgrade setuptools
-            sudo pip install awsebcli --upgrade
-       - run:
-          name: Deploying
-          command: eb deploy $CIRCLE_BRANCH-my-application
+            sudo pip install "urllib3<1.23,>=1.21.1" awsebcli --upgrade
+      # Build css and js (prod script builds these. you should make your own)
+      - run:
+          name: Install Node modules
+          working_directory: ~/repo
+          command: npm run prod
 
- workflows:
+      # Add everything (except vendors that will be installed automatically and node_modules that are not needed because we already built js and css) to a ZIP
+      - run:
+          name: ZIP project
+          working_directory: ~/Laravel-QA-Application
+          command: zip Laravel-QA-Application.zip -r * .[^.]* --exclude=vendor/* --exclude=node_modules/* --exclude=.circleci/* --exclude=.elasticbeanstalk/*
+
+      # Run EB deploy
+      - run:
+          name: Deploying
+          command: eb deploy --staged BRANCHNAME-QuestionAnswer-App
+
+workflows:
   version: 2
   build:
     jobs:
-      - deploy:
-          filters:
-            branches:
-              only:
-                - master
+    - deploy:
+        filters:
+          branches:
+            only:
+            - master
