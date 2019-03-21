@@ -6,7 +6,7 @@ branch-defaults:
   dev:
     environment: BRANCHNAME-QuestionAnswer-App
 global:
-  application_name: circleci-101
+  application_name: Laravel-QA-App
   default_ec2_keyname: XXXXXX
   default_platform: 64bit Amazon Linux 2018.03 v2.8.6 running PHP 7.2
   default_region: eu-west-2
