@@ -45,16 +45,7 @@ jobs:
             sudo apt-get -y -qq update
             sudo apt-get install python-pip python-dev build-essential
             sudo pip install --upgrade setuptools
-            sudo pip install awsebcli --upgrade
-            
-      - store_artifacts:
-          path: ~/app      
-            
-      # Add everything (except vendors that will be installed automatically and node_modules that are not needed because we already built js and css) to a ZIP
-      - run:
-          name: ZIP project
-          working_directory: ~/app
-          command: zip Laravel-QA-Application.zip -r * .[^.]* --exclude=vendor/* --exclude=node_modules/* --exclude=.circleci/* --exclude=.elasticbeanstalk/*
+            sudo pip install awsebcli --upgrade    
 
       # Run EB deploy
       - run:
