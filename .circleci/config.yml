@@ -34,12 +34,6 @@ jobs:
             - node_modules
             - ~/.yarn
 
-      # setting up environment
-      - run: 
-          name: Creating .env file
-          working_directory: ~/app
-          command: cp .env.example .env
-
       # run tests!
       # - run: phpunit
 
