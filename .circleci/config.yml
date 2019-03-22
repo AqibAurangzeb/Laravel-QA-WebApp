@@ -23,12 +23,6 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-          
-      # setting up environment
-      - run: cp .env.example .env
-
-      # set encryption key
-      - run: php artisan key:generate
 
       # Install NPM packages for frontend things
       - run: npm install
