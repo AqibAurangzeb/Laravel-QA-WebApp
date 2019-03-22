@@ -1,8 +1,8 @@
 branch-defaults:
   master:
-    environment: BRANCHNAME-QuestionAnswer-App
+    environment: LaravelQaApp1-env
 global:
-  application_name: Laravel-QA-App
+  application_name: Laravel-QA-App1
   default_ec2_keyname: XXXXXX
   default_platform: 64bit Amazon Linux 2018.03 v2.8.6 running PHP 7.2
   default_region: eu-west-2
