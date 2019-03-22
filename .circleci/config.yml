@@ -50,7 +50,7 @@ jobs:
       # Run EB deploy
       - run:
           name: Deploying
-          command: eb deploy BRANCHNAME-QuestionAnswer-App
+          command: eb deploy LaravelQaApp1-env
 
 workflows:
   version: 2
