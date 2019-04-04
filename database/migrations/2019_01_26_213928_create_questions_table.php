@@ -13,6 +13,7 @@ class CreateQuestionsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('question');
             $table->string('description')->nullable();
+            $table->string('best_answer_id')->nullable();
             $table->boolean('solved')->default(false);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

@@ -24,6 +24,6 @@ class AnswersController extends Controller
 
         Answer::create($attributes);
 
-        return Redirect::to('questions/'.Request::get('question_id'));
+        return redirect()->back();
     }
 }

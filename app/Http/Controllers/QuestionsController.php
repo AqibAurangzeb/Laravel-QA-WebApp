@@ -75,4 +75,17 @@ class QuestionsController extends Controller
 
         return redirect('/questions');
     }
+
+    public function markBestAnswer($id)
+    {
+        $question = Question::findorFail($id);
+
+        $this->authorize('update', $question);
+
+        $question->best_answer_id = request('bestAnswer');
+
+        $question->save();
+
+        return redirect()->back();
+    }
 }

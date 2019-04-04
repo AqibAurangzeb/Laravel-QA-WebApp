@@ -23,7 +23,7 @@ class VotesController extends Controller
 
         Vote::updateOrCreate($attributes);
 
-        return Redirect::to('questions/'.Request::get('question_id'));
+        return redirect()->back();
 
     }
 }

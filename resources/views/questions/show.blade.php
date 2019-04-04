@@ -27,7 +27,7 @@
             <ul class="list-group list-group-flush">
                 @foreach($question->answers as $answer)
 
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center {{ $question->best_answer_id == $answer->id ? 'list-group-item-success' : '' }}">
                             <span>
                             @if(strpos($answer->user->avatar , 'http') === 0)
                                 <img src="{{ $answer->user->avatar }}" style="width: 42px;height: 42px;border-radius: 50%; padding-right: 3px">
@@ -36,17 +36,27 @@
                             @endif
                             {{ $answer->user->name }}: {{ $answer->answer }}
                             </span>
-                            <span class="badge badge-primary badge-pill">
-                                <form class="form-inline"  method="POST" action="/vote">
-                                    {{ csrf_field() }}
-                                     <input type="hidden" name="answer_id" value="{{ $answer->id }}">
-                                     <input type="hidden" name="question_id" value="{{ $question->id }}">
-                                    <span>{{ count($answer->votes) . '  '}}<button type="{{ auth()->id() != null ? 'submit' : 'button' }}"><i class="far fa-thumbs-up"></i></button></span>
-                                </form>
+                            <span>
+                                <span class="badge badge-primary badge-pill">
+                                    <form class="form-inline"  method="POST" action="/vote">
+                                        {{ csrf_field() }}
+                                         <input type="hidden" name="answer_id" value="{{ $answer->id }}">
+                                         <input type="hidden" name="question_id" value="{{ $question->id }}">
+                                        <span>{{ count($answer->votes) . '  '}}<button type="{{ auth()->id() != null ? 'submit' : 'button' }}"><i class="far fa-thumbs-up"></i></button></span>
+                                    </form>
+                                </span>
+                                @can('update', $question)
+                                    <span class="badge badge-primary badge-pill">
+                                        <form class="form-inline"  method="POST" action="/questions/{{ $question->id }}/markBestAnswer">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="bestAnswer" value="{{ $answer->id }}">
+                                            <button type="submit">Mark Best Answer</button>
+                                        </form>
+                                    </span>
+                                @endcan
                             </span>
-
-
                         </li>
+
                 @endforeach
             </ul>
 
