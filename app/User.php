@@ -10,28 +10,27 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'avatar','password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * Search - Not used at the moment
-     * @return object
-     */
+    public function questions() {
+        return $this->hasMany('App\Question');
+    }
+
+    public function answers() {
+        return $this->hasMany('App\Answers');
+    }
+
+    public function votes()
+    {
+        return $this->hasMany('App\Vote');
+    }
+
     public static function search($query) {
         return User::where('name', 'LIKE', '%'.$query.'%');
     }

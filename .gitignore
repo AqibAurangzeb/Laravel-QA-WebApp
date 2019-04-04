@@ -4,8 +4,13 @@
 /storage/*.key
 /vendor
 /.idea
+/database/db.sqlite3
+.env
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+composer.phar
+installer
+.DS_Store

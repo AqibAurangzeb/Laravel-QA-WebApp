@@ -11,6 +11,9 @@ use App\User;
 
 class QuestionsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth')->except(['index','show']);
+    }
 
     public function index()
     {
@@ -21,57 +24,52 @@ class QuestionsController extends Controller
 
     public function create()
     {
-        return view('questions.ask');
+        return view('questions.create');
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $question = new Question();
+        $attributes = request()->validate([
+            'question' => ['required', 'min:5', 'max:255'],
+            'description' => ['nullable', 'min:5', 'max:255']
+        ]);
 
-        $question->user_id = Auth::user()->id;
+        $attributes['user_id'] = auth()->id();
 
-        $question->question = request('question');
-
-        $question->save();
+        Question::create($attributes);
 
         return redirect('/questions');
     }
 
-    public function show($id)
+    public function show(Question $question)
     {
-        $question = Question::findorfail($id);
-
         return view('questions.show', compact('question'));
     }
 
-    public function edit($id)
+    public function edit(Question $question)
     {
-        $question = Question::findorfail($id);
+        $this->authorize('update', $question);
 
         return view('questions.edit', compact('question'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Question $question)
     {
-        $question = Question::find($id);
+        $this->authorize('update', $question);
 
-        if($question->user_id != Auth::user()->id) {
-            return redirect('/questions');
-        }
-        $question->question = request('question');
+        $attributes = request()->validate([
+            'question' => ['required', 'min:5', 'max:255'],
+            'description' => ['nullable', 'min:5', 'max:255']
+        ]);
 
-        $question->save();
+        $question->update($attributes);
 
         return redirect('/questions');
     }
 
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        $question = Question::find($id);
-
-        if($question->user_id != Auth::user()->id) {
-            return redirect('/questions');
-        }
+        $this->authorize('update', $question);
 
         $question->delete();
 

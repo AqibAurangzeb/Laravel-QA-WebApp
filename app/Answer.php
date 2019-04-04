@@ -6,13 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    // Create the relationship to users
+    protected $fillable = [
+        'user_id', 'answer', 'question_id'
+    ];
+
     public function user() {
         return $this->belongsTo('App\User');
     }
 
-    // Create the relationship to answers
-    public function answers() {
-        return $this->hasMany('App\Answer');
+    public function question() {
+        return $this->belongsTo('App\Question');
+    }
+
+    public function votes() {
+        return $this->hasMany('App\Vote');
     }
 }

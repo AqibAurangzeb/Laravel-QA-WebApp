@@ -9,17 +9,29 @@
 
                     <div class="card-body">
                         <form method="POST" action="/questions/{{ $question->id }}">
-                            <div class="input-group mb-3">
                                 {{ csrf_field() }}
 
-                                <input type="text" name="question" value="{{ $question->question }}" class="form-control" aria-label="Question" aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary"type="submit" id="button-addon2" name="_method" value="PATCH">Update</button>
+                                <div class="form-group">
+                                    <label>Question</label>
+                                    <input type="text" name="question" id="question" class="form-control {{ $errors->has('question') ? 'is-invalid' : ''}}" value="{{ $question->question }}">
+                                    <div class="invalid-feedback">
+                                        @if($errors->has('question'))
+                                            {{ $errors->first('question') }}
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="input-group-append">
-                                    <button class="btn btn-danger" type="submit" id="button-addon2" name="_method" value="DELETE">Delete</button>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" id="description" class="form-control {{ $errors->has('description') ? 'is-invalid' : ''}}" rows="3">{{ $question->description }}</textarea>
+                                    <div class="invalid-feedback">
+                                        @if($errors->has('description'))
+                                            {{ $errors->first('description') }}
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
+                            <button class="btn btn-primary"type="submit" id="button-addon2" name="_method" value="PATCH">Update</button>
+                            <button class="btn btn-danger" type="submit" id="button-addon2" name="_method" value="DELETE">Delete</button>
+
                         </form>
                     </div>
                 </div>

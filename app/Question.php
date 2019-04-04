@@ -6,20 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    // Create the relationship to users
+    protected $fillable = [
+        'user_id', 'question', 'description'
+    ];
+
     public function user() {
         return $this->belongsTo('App\User');
     }
 
-    // Create the relationship to answers
     public function answers() {
         return $this->hasMany('App\Answer');
     }
 
-    /**
-     * Search
-     * @return object
-     */
+    public function votes()
+    {
+        return $this->hasMany('App\Vote');
+    }
+
     public static function search($query) {
         return Question::where('question', 'LIKE','%'.$query.'%')->get();
     }

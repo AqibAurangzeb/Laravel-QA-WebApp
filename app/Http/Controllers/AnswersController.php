@@ -10,14 +10,20 @@ use App\Answer;
 
 class AnswersController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function store() {
-        $answer = new Answer();
+        $attributes = request()->validate([
+            'answer' => ['required', 'max:255'],
+            'question_id' => ['required']
+        ]);
 
-        $answer->user_id = Auth::user()->id;
-        $answer->question_id = request('question_id');
-        $answer->answer = request('answer');
+        $attributes['user_id'] = auth()->id();
 
-        $answer->save();
+        Answer::create($attributes);
+
         return Redirect::to('questions/'.Request::get('question_id'));
     }
 }

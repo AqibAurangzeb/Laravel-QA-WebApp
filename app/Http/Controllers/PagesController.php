@@ -15,7 +15,7 @@ class PagesController extends Controller
 
     public function loggedIn()
     {
-        return view('loggedIn');
+        return view('/loggedIn');
     }
 
     public function search() {
