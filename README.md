@@ -35,7 +35,9 @@ Make the empty database, use pwd to get path and update DB_DATABASE path in conf
 touch db.sqlite3
 ```
 Create tables, nothing to populate in this case.
+```
 php artisan migrate
+```
 
 ### Start the Application
 ```
