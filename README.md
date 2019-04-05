@@ -4,10 +4,10 @@ A laravel Question & Answer application supporting CRUD, search/filtering and us
 ## Question&Answer Installation
 
 ### Install Composer
-
+```
 wget http://getcomposer.org/installer
 php installer
-
+```
 ### Install Dependencies with Composer
 ```
 php composer.phar install
