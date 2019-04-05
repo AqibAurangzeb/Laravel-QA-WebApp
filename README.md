@@ -60,3 +60,10 @@ environment: YOUR-ENVIRONMENT-NAME-ON-AWS-ELASTICK-BEANSTALK
 application_name: YOUR-APPLICATION-NAME-ON-AWS-ELASTICK-BEANSTALK
 ```
 The global settings may differ for your AWS instance therefore just update as needed.
+
+### Add project to CircleCi
+Log into CircleCi via your GitHub account, find the github repo and add the project.
+The application will now build in CircleCi but will fail as AWS instance needs to be started-up and a user with access created.
+
+
+
