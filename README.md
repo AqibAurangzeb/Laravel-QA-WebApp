@@ -46,7 +46,7 @@ php artisan serve
 ```
 
 ## Build & Deployment Setup (CI/CD Pipeline)
-Build and deployment configuration is setup for CircleCi and AWS ElastickBeanstalk. To set this up for yourself, follow steps below.
+Build and deployment configuration is setup for CircleCi and AWS ElastickBeanstalk. Follow steps to setup.
 
 ### Configuration
 
