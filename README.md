@@ -40,7 +40,7 @@ php artisan migrate
 ```
 
 ### Start the Application
-Start the server, the application will now be available on port 8000.
+Start the server, the application will be available on port 8000.
 ```
 php artisan serve
 ```
