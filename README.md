@@ -63,7 +63,14 @@ The global settings may differ for your AWS instance therefore just update as ne
 
 ### Add project to CircleCi
 Log into CircleCi via your GitHub account, find the github repo and add the project.
-The application will now build in CircleCi but will fail as AWS instance needs to be started-up and a user with access created.
+
+Go-into project settings and add environment variables. This will need updating when you've created a user on AWS. 
+```
+AWS_ACCESS_KEY_ID: XXXXXXXXXXXXXXXXXXXXX
+AWS_SECRET_ACCESS_KEY: XXXXXXXXXXXXXXXXXXXXX
+```
+
+The application will now build in CircleCi but will fail as AWS instance needs to be started-up and AWS client/secret provided.
 
 
 
