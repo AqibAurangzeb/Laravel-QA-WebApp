@@ -1,6 +1,6 @@
-# Laravel Question&Answer Application
+# Question&Answer
 
-## Question&Answer Installation
+## Installation
 
 ### Install Composer
 ```
