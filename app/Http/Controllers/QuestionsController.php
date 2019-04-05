@@ -84,6 +84,8 @@ class QuestionsController extends Controller
 
         $question->best_answer_id = request('bestAnswer');
 
+        $question->solved = true;
+
         $question->save();
 
         return redirect()->back();
