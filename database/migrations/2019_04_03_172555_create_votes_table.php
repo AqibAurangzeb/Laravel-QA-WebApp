@@ -15,7 +15,7 @@ class CreateVotesTable extends Migration
             $table->unsignedInteger('answer_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->foreign('answer_id')->references('id')->on('answers');
+            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
             $table->timestamps();
         });
     }
