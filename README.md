@@ -12,16 +12,15 @@ Update environment and application name in .elasticeanstalk/config.yml
 ```
 environment: YOUR-ENVIRONMENT-NAME-ON-AWS-ELASTICK-BEANSTALK
 application_name: YOUR-APPLICATION-NAME-ON-AWS-ELASTICK-BEANSTALK
-``
+```
 The global settings may differ for your AWS instance therefore just update as needed.
 
 ## Question&Answer Installation
 
 ### Install Composer
-```
+
 wget http://getcomposer.org/installer
 php installer
-```
 
 ### Install Dependencies with Composer
 ```
