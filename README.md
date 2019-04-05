@@ -1,7 +1,7 @@
 # Question & Answer
 A laravel Question & Answer application supporting CRUD, search/filtering and user authentication. In addition it implements advanced features such as master-detail, security, gravatar and google-login. 
 
-## Question&Answer Installation
+## Installation
 
 ### Install Composer
 ```
