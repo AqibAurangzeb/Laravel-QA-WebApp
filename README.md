@@ -34,16 +34,16 @@ Make the empty database, use pwd to get path and update DB_DATABASE path in conf
 ```
 touch db.sqlite3
 ```
-Create tables, nothing to populate in this case.
+Create tables.
 ```
 php artisan migrate
 ```
 
 ### Start the Application
+Start the server, the application will now be available on port 8000.
 ```
 php artisan serve
 ```
-Start the server, the application will now be available on port 8000
 
 ## Build & Deployment Setup (CI/CD Pipeline)
 Build and deployment configuration is setup for CircleCi and AWS ElastickBeanstalk. To set this up for yourself, follow steps below.
