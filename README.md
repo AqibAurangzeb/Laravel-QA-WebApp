@@ -45,10 +45,10 @@ php artisan serve
 ```
 Start the server, the application will now be available on port 8000
 
-## Build & Deployment (CI/CD Pipeline)
+## Build & Deployment Setup (CI/CD Pipeline)
+Build and deployment configuration is setup for CircleCi and AWS ElastickBeanstalk. To set this up for yourself, follow steps below.
 
 ### Configuration
-Build and deployment configuration is setup for CircleCi and AWS ElastickBeanstalk. To set this up for yourself:
 
 Update run command in .circleci/configyml
 ```
