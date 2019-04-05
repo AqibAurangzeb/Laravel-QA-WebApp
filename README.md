@@ -114,7 +114,7 @@ Create the group so it's assigned to your new user.
 
 Review and create user.
 
-Add the created user's access and secret to the environment variables in CircleCi.
+The user has not been created. Add the created user's client id and secret to the environment variables in CircleCi.
 
 ### Add .env file
 
